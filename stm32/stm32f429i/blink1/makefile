@@ -30,7 +30,7 @@ CFLAGS = -DSTM32F4
 CFLAGS += -mthumb -mcpu=cortex-m4
 CFLAGS += -mfloat-abi=hard
 CFLAGS += -Os
-CGLAGS += -Wall -Wextra -Wundef -Wshadow -Wredundant-decls
+CFLAGS += -Wall -Wextra -Wundef -Wshadow -Wredundant-decls
 CFLAGS += -fno-common -ffunction-sections -fdata-sections
 CFLAGS += -I$(CM3_DIR)/include
 
