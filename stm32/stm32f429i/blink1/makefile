@@ -11,14 +11,6 @@ SIZE = arm-none-eabi-size
 
 
 # -----------------------------
-# external libs
-# -----------------------------
-ifndef CM3_DIR
-  $(error CM3_DIR should point to your libopencm3 directory)
-endif
-
-
-# -----------------------------
 # sources
 # -----------------------------
 SRCS = main.c
@@ -46,9 +38,10 @@ LIBS += -L $(call get_lib_path,libgcc.a)
 LIBS += -L $(call get_lib_path,libnosys.a)
 LIBS += -L$(CM3_DIR)/lib
 
+LD_FILE = stm32/f4/stm32f405x6.ld
 LDFLAGS = -Map=$(PROJECT).map --cref
 LDFLAGS += --static
-LDFLAGS += -T stm32/f4/stm32f405x6.ld
+LDFLAGS += -T $(LD_FILE)
 
 
 $(PROJECT).hex: $(PROJECT).elf
@@ -58,15 +51,23 @@ OBJS = $(subst .c,.o, $(SRCS))
 
 
 $(PROJECT).elf: $(OBJS)
+ifdef CM3_DIR
 	$(LD) -o $@ $(OBJS) \
           --start-group $(LIBS) --end-group \
           $(LDFLAGS)
 	$(SIZE) $@
 	$(OBJDUMP) -S $@ > $(PROJECT).disa
+else
+	$(error CM3_DIR should point to your libopencm3 directory)
+endif
 
 
 %.o: %.c
+ifdef CM3_DIR
 	$(CC) $(CFLAGS) -c $< -o $@
+else
+	$(error CM3_DIR should point to your libopencm3 directory)
+endif
 
 
 .PHONY: flash
