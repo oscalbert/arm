@@ -14,13 +14,11 @@ SIZE = arm-none-eabi-size
 # external libs
 # -----------------------------
 #CM3_DIR = your libopencm3 directory !
-CM3_DIR = /home/ols/cots/libopencm3
 ifndef CM3_DIR
   $(error CM3_DIR should point to your libopencm3 directory)
 endif
 
 #FREERTOS_DIR = your FreeRTOS/Source path
-FREERTOS_DIR = /home/ols/cots/FreeRTOSv10.1.1/FreeRTOS/Source
 ifndef FREERTOS_DIR
   $(error FREERTOS_DIR should point to your FreeRTOS directory)
 endif
