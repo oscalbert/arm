@@ -1,8 +1,8 @@
 # tasks1
 
 This project starts three FreeRTOS tasks:
-* one task for for the LED3;
-* one task for the the LED4;
+* one task for the LED3;
+* one task for the LED4;
 * one task that dumps some memory content on USART1.
 
 To compile it, just setup the libopencm3 and FreeRTOS paths in the makefile and:
